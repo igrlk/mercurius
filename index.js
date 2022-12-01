@@ -566,13 +566,19 @@ const plugin = fp(async function (app, opts) {
       return maybeFormatErrors(execution, context)
     }
 
+    const abortController = new AbortController()
+    reply?.raw.on('close', () => {
+      abortController.abort('Connection closed.')
+    })
+
     const execution = await executeGraphql(opts.defer, {
       schema: modifiedSchema || fastifyGraphQl.schema,
       document: modifiedDocument || document,
       rootValue: root,
       contextValue: context,
       variableValues: variables,
-      operationName
+      operationName,
+      signal: abortController.signal
     })
 
     /* istanbul ignore next */

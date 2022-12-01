@@ -27,7 +27,7 @@
   },
   "homepage": "https://mercurius.dev",
   "peerDependencies": {
-    "graphql": "^17.0.0-alpha.2"
+    "graphql": "canary-pr-3791"
   },
   "devDependencies": {
     "@graphql-tools/merge": "^8.0.0",
