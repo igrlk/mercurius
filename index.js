@@ -568,6 +568,7 @@ const plugin = fp(async function (app, opts) {
 
     const abortController = new AbortController()
     reply?.raw.on('close', () => {
+      console.log('aborted (log from Mercurius)')
       abortController.abort('Connection closed.')
     })
 
